@@ -1,5 +1,6 @@
-import { Category } from './category';
 import { omit } from 'lodash';
+import { validate as uuidValidate } from 'uuid';
+import { Category, CategoryProperties } from './category';
 describe('Category Test', () => {
   it('sould constructor of  property name', () => {
     const category = new Category({
@@ -166,5 +167,22 @@ describe('Category Test', () => {
     });
 
     expect(category.createdAt).toBe(createdAt);
+  });
+
+  it('should id fild', () => {
+    type CategoryData = { props: CategoryProperties; id?: string };
+
+    const data: CategoryData[] = [
+      { props: { name: 'Move' } },
+      { props: { name: 'Move' }, id: null },
+      { props: { name: 'Move' }, id: undefined },
+      { props: { name: 'Move' }, id: '2a600973-d97f-4fde-b2d5-39f5fd7f8414' },
+    ];
+
+    data.forEach((i) => {
+      const category = new Category(i.props, i.id);
+      expect(category.id).not.toBeNull();
+      expect(uuidValidate(category.id)).toBeTruthy();
+    });
   });
 });
