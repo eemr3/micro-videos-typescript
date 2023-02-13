@@ -96,4 +96,75 @@ describe('Category Test', () => {
       createdAt,
     });
   });
+
+  it('sould getter an setter description prop', () => {
+    let category = new Category({
+      name: 'Move',
+      description: 'some description',
+    });
+    expect(category.props.description).toBe('some description');
+
+    category = new Category({
+      name: 'Move',
+    });
+    expect(category.props.description).toBeNull();
+
+    category = new Category({
+      name: 'Move',
+      description: undefined,
+    });
+    expect(category.props.description).toBeNull();
+  });
+
+  it('sould getter an setter isActive prop', () => {
+    let category = new Category({
+      name: 'Move',
+      isActive: true,
+    });
+    expect(category.props.isActive).toBeTruthy();
+
+    category = new Category({
+      name: 'Move',
+    });
+    expect(category.props.isActive).toBeTruthy();
+
+    category = new Category({
+      name: 'Move',
+      isActive: false,
+    });
+    expect(category.description).toBeFalsy();
+  });
+  it('sould getter an setter isActive prop', () => {
+    let category = new Category({
+      name: 'Move',
+      isActive: true,
+    });
+    expect(category.props.isActive).toBeTruthy();
+
+    category = new Category({
+      name: 'Move',
+    });
+    expect(category.props.isActive).toBeTruthy();
+
+    category = new Category({
+      name: 'Move',
+      isActive: false,
+    });
+    expect(category.description).toBeFalsy();
+  });
+  it('sould getter createdAt prop', () => {
+    const createdAt = new Date();
+    let category = new Category({
+      name: 'Move',
+      createdAt,
+    });
+    expect(category.props.createdAt).toBeInstanceOf(Date);
+
+    category = new Category({
+      name: 'Move',
+      createdAt,
+    });
+
+    expect(category.createdAt).toBe(createdAt);
+  });
 });
